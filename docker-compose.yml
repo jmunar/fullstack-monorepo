@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  calypso:
+    build:
+      context: ./golang
+      dockerfile: ./Dockerfile
+      args:
+        project: ./cmd/calypso/
+    environment:
+      - PORT=3001
+      - APP_NAME=calpyso
+    ports:
+      - 8001:3001
+    restart: on-failure
+    volumes:
+      - calypso_vol:/usr/src/calypso/
+    networks:
+      - monorepo_net
+  echo:
+    build:
+      context: ./golang
+      dockerfile: ./Dockerfile
+      args:
+        project: ./cmd/echo/
+    environment:
+      - PORT=3001
+      - APP_NAME=echo
+    ports:
+      - 8002:3001
+    restart: on-failure
+    volumes:
+      - echo_vol:/usr/src/echo/
+    networks:
+      - monorepo_net
+
+volumes:
+  calypso_vol:
+  echo_vol:
+
+networks:
+  monorepo_net:
+    driver: bridge
