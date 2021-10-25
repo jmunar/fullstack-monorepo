@@ -14,7 +14,7 @@ services:
   calypso_test:
     build:
       context: ./golang
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.test
       args:
         project: ./cmd/calypso/...
     environment:
@@ -29,7 +29,7 @@ services:
   echo_test:
     build:
       context: ./golang
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.test
       args:
         project: ./cmd/echo/...
     environment:
